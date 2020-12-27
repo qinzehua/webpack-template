@@ -4,6 +4,8 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlExternalsPlugin = require("html-webpack-externals-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+
 const glob = require("glob");
 
 const setMPA = () => {
@@ -54,7 +56,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: "babel-loader",
+        exclude: /node_modules/,
+        use: ["babel-loader"],
       },
       {
         test: /\.css$/,
@@ -146,6 +149,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     ...htmlWebpackPlugins,
+    // new BundleAnalyzerPlugin(),
     /* new HtmlExternalsPlugin({
       externals: [
         {
@@ -166,19 +170,18 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: "all",
-      minSize: 0,
+      minSize: 30000,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
         },
         default: {
-          minChunks: 2,
+          minChunks: 1,
           priority: -20,
-          reuseExistingChunk: true,
         },
       },
     },
   },
-  // devtool: "source-map",
+  devtool: "source-map",
 };

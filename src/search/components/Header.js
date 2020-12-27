@@ -1,5 +1,9 @@
 import React from "react";
-console.log("头部");
-export const Header = () => {
-  return <p className="search-title">标题</p>;
+import Vue from "vue";
+export const Header = ({ loadComponent }) => {
+  return (
+    <p className="search-title" onClick={loadComponent}>
+      标题(点击加载内容)
+    </p>
+  );
 };
