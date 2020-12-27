@@ -8,7 +8,7 @@
     "test": "webpack --config webpack.test.js",
     "watch": "webpack --config webpack.prod.js --watch",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
-    "precommit": "lint-staged"
+    "lint": "eslint --ext .js --ext .jsx src/"
   },
   "keywords": [],
   "author": "",
@@ -56,9 +56,9 @@
     "react-dom": "^17.0.1",
     "vue": "^2.6.12"
   },
-  "lint-staged": {
-  "src/**/*.{js,json,css,vue}": [
-   "eslint --fix",
-   "git add"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo 'husky' && npm run lint"
+    }
+  }
 }

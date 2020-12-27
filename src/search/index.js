@@ -1,8 +1,9 @@
 import React from "react";
-import ReactDom from "react-dom";
-import { Header } from "./components/Header.js";
 import "../asset/css/search.css";
 import "../asset/css/search.less";
+
+import ReactDom from "react-dom";
+import { Header } from "./components/Header.js";
 
 // 这两个包，不能通过tree shaking 优化
 import _ from "lodash";
