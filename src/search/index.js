@@ -1,13 +1,12 @@
 import React from "react";
+import { Header } from "./components/Header.js";
 import "../asset/css/search.css";
 import "../asset/css/search.less";
-
-import ReactDom from "react-dom";
-import { Header } from "./components/Header.js";
 
 // 这两个包，不能通过tree shaking 优化
 import _ from "lodash";
 import $ from "../utils/query";
+import ReactDom from "react-dom";
 
 class Search extends React.Component {
   constructor() {
@@ -16,6 +15,7 @@ class Search extends React.Component {
       Body: null,
     };
   }
+
   loadComponent() {
     import(/* webpackChunkName: "Body" */ "./components/Body.js").then(
       (res) => {
