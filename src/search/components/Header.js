@@ -1,5 +1,4 @@
 import React from "react";
-import Vue from "vue";
 export const Header = ({ loadComponent }) => {
   return (
     <p className="search-title" onClick={loadComponent}>

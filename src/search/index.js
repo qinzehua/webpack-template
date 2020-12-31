@@ -1,40 +1,35 @@
-import React from "react";
-import { Header } from "./components/Header.js";
-import "../asset/css/search.css";
-import "../asset/css/search.less";
-
-// 这两个包，不能通过tree shaking 优化
-import _ from "lodash";
-import $ from "../utils/query";
-import ReactDom from "react-dom";
+import React from 'react'
+import ReactDom from 'react-dom'
+import { Header } from './components/Header'
+import '../asset/css/search.css'
+import '../asset/css/search.less'
 
 class Search extends React.Component {
   constructor() {
-    super(...arguments);
+    super(...arguments)
     this.state = {
-      Body: null,
-    };
+      Body: null
+    }
   }
 
   loadComponent() {
-    import(/* webpackChunkName: "Body" */ "./components/Body.js").then(
-      (res) => {
-        console.log(res);
-        this.setState({
-          Body: res.Body,
-        });
-      }
-    );
+    import(/* webpackChunkName: "Body" */ './components/Body.js').then(res => {
+      console.log(res)
+      this.setState({
+        Body: res.Body
+      })
+    })
   }
+
   render() {
-    const { Body } = this.state;
+    const { Body } = this.state
     return (
       <div className="search-text">
-        <Header loadComponent={this.loadComponent.bind(this)}></Header>
+        <Header loadComponent={this.loadComponent} />
         {Body ? <Body /> : null}
       </div>
-    );
+    )
   }
 }
 
-ReactDom.render(<Search></Search>, document.getElementById("app"));
+ReactDom.render(<Search />, document.getElementById('app'))
