@@ -1,11 +1,5 @@
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "html",
-    "vue"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "editor.formatOnSave": true,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

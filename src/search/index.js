@@ -14,7 +14,6 @@ class Search extends React.Component {
 
   loadComponent() {
     import(/* webpackChunkName: "Body" */ './components/Body.js').then(res => {
-      console.log(res)
       this.setState({
         Body: res.Body
       })
@@ -22,10 +21,11 @@ class Search extends React.Component {
   }
 
   render() {
+    /* eslint-disable react/jsx-no-bind */
     const { Body } = this.state
     return (
       <div className="search-text">
-        <Header loadComponent={this.loadComponent} />
+        <Header loadComponent={this.loadComponent.bind(this)} />
         {Body ? <Body /> : null}
       </div>
     )
