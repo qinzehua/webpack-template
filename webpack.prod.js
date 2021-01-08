@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlExternalsPlugin = require('html-webpack-externals-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 
 const glob = require('glob')
 
@@ -57,7 +58,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader', 'eslint-loader']
       },
       {
         test: /\.css$/,
@@ -148,6 +149,7 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     new CleanWebpackPlugin(),
+    new FriendlyErrorPlugin(),
     ...htmlWebpackPlugins
     // new BundleAnalyzerPlugin(),
     /* new HtmlExternalsPlugin({
@@ -182,6 +184,21 @@ module.exports = {
         }
       }
     }
+  },
+  //警告 webpack 的性能提示
+  performance: {
+    hints: 'warning',
+    //入口起点的最大体积
+    maxEntrypointSize: 50000000,
+    //生成文件的最大体积
+    maxAssetSize: 30000000,
+    //只给出 js 文件的性能提示
+    assetFilter: function (assetFilename) {
+      return assetFilename.endsWith('.js')
+    }
+  },
+  stats: {
+    preset: 'errors-only'
   },
   devtool: 'source-map'
 }

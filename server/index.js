@@ -9,8 +9,14 @@ if (typeof self === 'undefined') {
   global.self = {}
 }
 const express = require('express')
+const fs = require('fs')
+const path = require('path')
 const { renderToString } = require('react-dom/server')
 const SSR = require('../dist/js/a/b/c/search-server.js')
+const template = fs.readFileSync(
+  path.join(__dirname, '../dist/search.html'),
+  'utf8'
+)
 
 function server(port) {
   const app = express()
@@ -30,18 +36,5 @@ function server(port) {
 server(process.env.PORT || 3000)
 
 const renderMarkup = str => {
-  return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Document</title>
-            <link href="./cssFile/a/search_86b0dcd2.css" rel="stylesheet"></link>
-        </head>
-        <body>
-            <div id="app">${str}</div>
-        </body>
-        </html>
-     `
+  return template.replace('<!--HTML_PLACEHOLDER-->', str)
 }
