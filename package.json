@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack --config ./builder-webpack/lib/webpack.prod.js",
     "ssr": "webpack --config webpack.ssr.js",
     "test": "webpack --config webpack.test.js",
     "watch": "webpack --config webpack.prod.js --watch",

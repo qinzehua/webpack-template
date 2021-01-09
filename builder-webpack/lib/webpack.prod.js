@@ -3,6 +3,7 @@ const path = require('path')
 const MiniCssExtractor = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Cssnano = require('cssnano')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const baseConfig = require('./webpack.base.js')
 const Project = process.cwd()
@@ -21,7 +22,8 @@ const prodConfig = {
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: Cssnano
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ],
   optimization: {
     splitChunks: {

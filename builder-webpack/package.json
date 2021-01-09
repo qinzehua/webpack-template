@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint ./lib --fix",
+    "lint": "eslint ./lib",
     "dev": "webpack-dev-server --config ./lib/webpack.dev.js --open"
   },
   "devDependencies": {
