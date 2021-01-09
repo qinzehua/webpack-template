@@ -54,7 +54,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractor.loader,
+            options: {
+              publicPath: '../../'
+            }
+          },
           'css-loader',
           {
             loader: 'px2rem-loader',
@@ -76,7 +81,12 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractor.loader,
+            options: {
+              publicPath: '../../'
+            }
+          },
           'css-loader',
           {
             loader: 'px2rem-loader',

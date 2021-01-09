@@ -11,7 +11,8 @@
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "pre:write": "prettier --w src/**/*.js",
     "pre:check": "prettier --c src/**/*.js",
-    "lint": "eslint --ext .js --ext .jsx src/"
+    "lint": "eslint --ext .js --ext .jsx src/",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",
@@ -40,7 +41,7 @@
     "glob": "^7.1.6",
     "html-webpack-externals-plugin": "^3.8.0",
     "html-webpack-plugin": "^4.5.0",
-    "husky": "^4.3.6",
+    "husky": "^4.3.7",
     "less": "^4.0.0",
     "less-loader": "^7.2.0",
     "lint-staged": "^10.5.3",
@@ -76,7 +77,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'husky' && npm run lint"
+      "pre-commit": "echo 'husky' && npm run lint-staged"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "npm run lint",
+      "git add"
+    ]
   }
 }

@@ -8,7 +8,7 @@ const Project = process.cwd()
 const devConfig = {
   mode: 'development',
   output: {
-    path: path.resolve(Project, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
   module: {
