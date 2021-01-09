@@ -30,6 +30,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "cssnano": "^4.1.10",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-loader": "^4.0.2",
@@ -87,5 +88,10 @@
     "src/**/*.{js,vue}": [
       "npm run lint"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
