@@ -34,7 +34,7 @@ const ssrConfig = {
     //     Project,
     //     './build/library/manifest_library.json'
     //   ))
-    // })
+    // }),
     // new BundleAnalyzerPlugin()
   ],
   optimization: {
