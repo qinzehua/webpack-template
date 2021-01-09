@@ -1,5 +1,5 @@
 const path = require('path')
-const miniCssExtractor = require('mini-css-extract-plugin')
+const MiniCssExtractor = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlExternalsPlugin = require('html-webpack-externals-plugin')
@@ -14,7 +14,7 @@ const setMPA = () => {
   const htmlWebpackPlugins = []
   const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'))
 
-  Object.keys(entryFiles).map(index => {
+  Object.keys(entryFiles).forEach(index => {
     const entryFile = entryFiles[index]
     const match = entryFile.match(/src\/(.*)\/index.js$/)
     if (match) {
@@ -32,7 +32,7 @@ const setMPA = () => {
             preserveLineBreaks: false,
             minifyCSS: true,
             minifyJS: true,
-            removeComments: true
+            removeComments: false
           }
         })
       )
@@ -57,14 +57,13 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: miniCssExtractor.loader,
+            loader: MiniCssExtractor.loader,
             options: {
               publicPath: '../../'
             }
@@ -91,7 +90,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: miniCssExtractor.loader,
+            loader: MiniCssExtractor.loader,
             options: {
               publicPath: '../../'
             }
@@ -141,7 +140,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new miniCssExtractor({
+    new MiniCssExtractor({
       filename: 'cssFile/a/[name]_[contenthash:8].css'
     }),
     new OptimizeCssAssetsPlugin({

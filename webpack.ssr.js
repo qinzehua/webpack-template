@@ -1,10 +1,11 @@
 const path = require('path')
-const miniCssExtractor = require('mini-css-extract-plugin')
+const MiniCssExtractor = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlExternalsPlugin = require('html-webpack-externals-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 
 const glob = require('glob')
 
@@ -13,7 +14,7 @@ const setMPA = () => {
   const htmlWebpackPlugins = []
   const entryFiles = glob.sync(path.join(__dirname, './src/*/index-server.js'))
 
-  Object.keys(entryFiles).map(index => {
+  Object.keys(entryFiles).forEach(index => {
     const entryFile = entryFiles[index]
     const match = entryFile.match(/src\/(.*)\/index-server.js$/)
     if (match) {
@@ -59,14 +60,13 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         use: ['babel-loader']
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: miniCssExtractor.loader,
+            loader: MiniCssExtractor.loader,
             options: {
               publicPath: '../../'
             }
@@ -93,7 +93,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: miniCssExtractor.loader,
+            loader: MiniCssExtractor.loader,
             options: {
               publicPath: '../../'
             }
@@ -143,7 +143,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new miniCssExtractor({
+    new MiniCssExtractor({
       filename: 'cssFile/a/[name]_[contenthash:8].css'
     }),
     new OptimizeCssAssetsPlugin({
@@ -151,6 +151,19 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     new CleanWebpackPlugin(),
+    new FriendlyErrorPlugin(),
+    function (err) {
+      this.hooks.done.tap('done', stats => {
+        if (
+          stats.compilation.errors &&
+          stats.compilation.errors.length &&
+          process.argv.indexOf('--watch') === -1
+        ) {
+          console.log('build error')
+          process.exit(1)
+        }
+      })
+    },
     ...htmlWebpackPlugins
     // new BundleAnalyzerPlugin(),
     /* new HtmlExternalsPlugin({
@@ -185,6 +198,21 @@ module.exports = {
         }
       }
     }
+  },
+  //警告 webpack 的性能提示
+  performance: {
+    hints: 'warning',
+    //入口起点的最大体积
+    maxEntrypointSize: 50000000,
+    //生成文件的最大体积
+    maxAssetSize: 30000000,
+    //只给出 js 文件的性能提示
+    assetFilter: function (assetFilename) {
+      return assetFilename.endsWith('.js')
+    }
+  },
+  stats: {
+    preset: 'errors-only'
   },
   devtool: 'source-map'
 }
