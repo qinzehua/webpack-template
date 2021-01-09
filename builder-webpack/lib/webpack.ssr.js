@@ -3,6 +3,7 @@ const MiniCssExtractor = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Cssnano = require('cssnano')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const webpack = require('webpack')
 
 const baseConfig = require('./webpack.base.js')
 
@@ -28,6 +29,12 @@ const ssrConfig = {
       assetNameRegExp: /\.css$/g,
       cssProcessor: Cssnano
     })
+    // new webpack.DllReferencePlugin({
+    //   manifest: require(path.join(
+    //     Project,
+    //     './build/library/manifest_library.json'
+    //   ))
+    // })
     // new BundleAnalyzerPlugin()
   ],
   optimization: {

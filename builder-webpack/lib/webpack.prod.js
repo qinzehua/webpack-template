@@ -5,6 +5,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Cssnano = require('cssnano')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
+const webpack = require('webpack')
 
 const baseConfig = require('./webpack.base.js')
 const Project = process.cwd()
@@ -24,6 +25,12 @@ const prodConfig = {
       assetNameRegExp: /\.css$/g,
       cssProcessor: Cssnano
     })
+    // new webpack.DllReferencePlugin({
+    //   manifest: require(path.join(
+    //     Project,
+    //     './build/library/manifest_library.json'
+    //   ))
+    // })
     // new BundleAnalyzerPlugin()
   ],
   optimization: {

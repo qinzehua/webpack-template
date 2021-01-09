@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dll": "webpack --config ./webpack.dll.js",
     "build": "webpack --config ./builder-webpack/lib/webpack.prod.js",
     "ssr": "webpack --config webpack.ssr.js",
     "test": "webpack --config webpack.test.js",
