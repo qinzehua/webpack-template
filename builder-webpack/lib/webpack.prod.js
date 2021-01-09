@@ -1,15 +1,22 @@
+const glob = require('glob')
 const WebpackMerge = require('webpack-merge').default
 const path = require('path')
+//提取css
 const MiniCssExtractor = require('mini-css-extract-plugin')
+//压缩css
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Cssnano = require('cssnano')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const PurgeCssWebpackPlugin = require('purgecss-webpack-plugin')
 
 const baseConfig = require('./webpack.base.js')
 const Project = process.cwd()
+const PATH = {
+  src: path.join(Project, './src')
+}
 
 const prodConfig = {
   mode: 'production',
@@ -25,6 +32,9 @@ const prodConfig = {
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: Cssnano
+    }),
+    new PurgeCssWebpackPlugin({
+      paths: glob.sync(`${PATH.src}/**/*`, { nodir: true })
     })
     // new HardSourceWebpackPlugin()
     // new webpack.DllReferencePlugin({
