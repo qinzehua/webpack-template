@@ -6,10 +6,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 const PostCssPreset = require('postcss-preset-env')
 
+const Project = process.cwd()
 const setMPA = () => {
   const entry = {}
   const htmlWebpackPlugins = []
-  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'))
+  const entryFiles = glob.sync(path.join(Project, './src/*/index.js'))
 
   Object.keys(entryFiles).forEach(index => {
     const entryFile = entryFiles[index]
@@ -19,7 +20,7 @@ const setMPA = () => {
       entry[pageName] = entryFile
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
-          template: path.join(__dirname, `src/${pageName}/index.html`),
+          template: path.join(Project, `src/${pageName}/index.html`),
           filename: `${pageName}.html`,
           chunks: [pageName],
           inject: true,
@@ -53,12 +54,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractor.loader,
-            options: {
-              publicPath: '../../'
-            }
-          },
+          'style-loader',
           'css-loader',
           {
             loader: 'px2rem-loader',
@@ -80,12 +76,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: MiniCssExtractor.loader,
-            options: {
-              publicPath: '../../'
-            }
-          },
+          'style-loader',
           'css-loader',
           {
             loader: 'px2rem-loader',
@@ -145,8 +136,5 @@ module.exports = {
       })
     },
     ...htmlWebpackPlugins
-  ],
-  stats: {
-    preset: 'errors-only'
-  }
+  ]
 }

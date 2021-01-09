@@ -1,15 +1,29 @@
-const WebpackMerge = require('webpack-merge');
-const webpack = require('webpack');
-const baseConfig = require('./webpack.base.js');
+const WebpackMerge = require('webpack-merge').default
+const webpack = require('webpack')
+const path = require('path')
+
+const baseConfig = require('./webpack.base.js')
+const Project = process.cwd()
 
 const devConfig = {
   mode: 'development',
+  output: {
+    path: path.resolve(Project, 'dist'),
+    filename: '[name].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['eslint-loader']
+      }
+    ]
+  },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     contentBase: './dist',
-    hot: true,
-    stats: 'errors-only',
+    hot: true
   },
-  devtool: 'source-map',
-};
-module.exports = WebpackMerge(baseConfig, devConfig);
+  devtool: 'source-map'
+}
+module.exports = WebpackMerge(baseConfig, devConfig)
