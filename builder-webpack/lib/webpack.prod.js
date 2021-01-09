@@ -69,8 +69,21 @@ const prodConfig = {
       return assetFilename.endsWith('.js')
     }
   },
-
-  devtool: 'source-map'
+  devtool: 'source-map',
+  resolve: {
+    alias: {
+      react: path.resolve(
+        Project,
+        './node_modules/react/umd/react.production.min.js'
+      ),
+      'react-dom': path.resolve(
+        Project,
+        './node_modules/react-dom/umd/react-dom.production.min.js'
+      )
+    },
+    extensions: ['.js'],
+    mainFields: ['main']
+  }
 }
 
 module.exports = WebpackMerge(baseConfig, prodConfig)

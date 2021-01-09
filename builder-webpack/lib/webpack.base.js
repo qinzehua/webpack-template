@@ -49,6 +49,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        include: path.join(Project, 'src'),
         use: ['babel-loader?cacheDirectory=true']
       },
       {
