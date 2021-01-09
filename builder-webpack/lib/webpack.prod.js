@@ -4,6 +4,7 @@ const MiniCssExtractor = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Cssnano = require('cssnano')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 const baseConfig = require('./webpack.base.js')
 const Project = process.cwd()
@@ -22,8 +23,8 @@ const prodConfig = {
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: Cssnano
-    }),
-    new BundleAnalyzerPlugin()
+    })
+    // new BundleAnalyzerPlugin()
   ],
   optimization: {
     splitChunks: {
@@ -39,7 +40,13 @@ const prodConfig = {
           priority: -20
         }
       }
-    }
+    },
+    minimizer: [
+      // 开启多进程并行压缩
+      new TerserWebpackPlugin({
+        parallel: true
+      })
+    ]
   },
   // 警告 webpack 的性能提示
   performance: {
@@ -53,9 +60,7 @@ const prodConfig = {
       return assetFilename.endsWith('.js')
     }
   },
-  stats: {
-    preset: 'errors-only'
-  },
+
   devtool: 'source-map'
 }
 

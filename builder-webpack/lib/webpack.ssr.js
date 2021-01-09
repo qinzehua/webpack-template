@@ -27,8 +27,8 @@ const ssrConfig = {
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: Cssnano
-    }),
-    new BundleAnalyzerPlugin()
+    })
+    // new BundleAnalyzerPlugin()
   ],
   optimization: {
     splitChunks: {

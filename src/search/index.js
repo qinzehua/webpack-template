@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import _ from 'lodash'
 import { Header } from './components/Header'
 import '../asset/css/search.css'
 import '../asset/css/search.less'
@@ -10,6 +11,8 @@ class Search extends React.Component {
     this.state = {
       Body: null
     }
+    const a = _.chunk(['a', 'b', 'c', 'd'], 2)
+    console.log(a)
   }
 
   loadComponent() {
