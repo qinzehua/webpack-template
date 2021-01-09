@@ -12,7 +12,8 @@
     "pre:write": "prettier --w src/**/*.js",
     "pre:check": "prettier --c src/**/*.js",
     "lint": "eslint --ext .js --ext .jsx src/",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "changelog": "conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0"
   },
   "keywords": [],
   "author": "",
