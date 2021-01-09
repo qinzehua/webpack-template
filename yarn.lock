@@ -2285,7 +2285,7 @@ commander@~2.6.0:
   resolved "https://registry.npm.taobao.org/commander/download/commander-2.6.0.tgz?cache=0&sync_timestamp=1607931421020&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-2.6.0.tgz#9df7e52fb2a0cb0fb89058ee80c3104225f37e1d"
   integrity sha1-nfflL7Kgyw+4kFjugMMQQiXzfh0=
 
-commitizen@^4.0.3:
+commitizen@^4.0.3, commitizen@^4.2.2:
   version "4.2.2"
   resolved "https://registry.npm.taobao.org/commitizen/download/commitizen-4.2.2.tgz#1a93dd07208521ea1ebbf832593542dac714cc79"
   integrity sha1-GpPdByCFIeoeu/gyWTVC2scUzHk=
