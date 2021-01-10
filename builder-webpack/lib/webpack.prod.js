@@ -25,6 +25,37 @@ const prodConfig = {
     filename: 'js/a/b/c/[name]_[chunkhash:8].js',
     publicPath: './'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif|jpeg)$/i,
+        use: [
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true
+              },
+              optipng: {
+                enabled: false
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
   plugins: [
     new MiniCssExtractor({
       filename: 'cssFile/a/[name]_[contenthash:8].css'
