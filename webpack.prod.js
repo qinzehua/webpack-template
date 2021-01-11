@@ -9,6 +9,8 @@ const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 
 const glob = require('glob')
 
+console.log(new FriendlyErrorPlugin())
+
 const setMPA = () => {
   const entry = {}
   const htmlWebpackPlugins = []

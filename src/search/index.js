@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { Header } from './components/Header'
 import '../asset/css/search.css'
 import '../asset/css/search.less'
+import '../test.qzh'
 
 class Search extends React.Component {
   constructor() {

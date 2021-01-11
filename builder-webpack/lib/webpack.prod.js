@@ -28,28 +28,12 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif|jpeg)$/i,
+        test: /\.qzh$/,
         use: [
           {
-            loader: 'image-webpack-loader',
+            loader: path.join(__dirname, '../../loaders/row-loader.js'),
             options: {
-              mozjpeg: {
-                progressive: true
-              },
-              optipng: {
-                enabled: false
-              },
-              pngquant: {
-                quality: [0.65, 0.9],
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 75
-              }
+              name: 'xxxxxxxxxx'
             }
           }
         ]
