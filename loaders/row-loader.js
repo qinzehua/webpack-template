@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const LoaderUtils = require('loader-utils')
-module.exports = function (source) {
+
+module.exports = function RowLoader(source) {
   const { name } = LoaderUtils.getOptions(this)
   const url = LoaderUtils.interpolateName(this, `${name}.[ext]`, source)
   const json = JSON.stringify(source)
