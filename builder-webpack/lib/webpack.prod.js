@@ -11,6 +11,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const PurgeCssWebpackPlugin = require('purgecss-webpack-plugin')
+const ZipPlugin = require('../../my-plugins/zip-plugin')
 
 const baseConfig = require('./webpack.base.js')
 const Project = process.cwd()
@@ -28,12 +29,28 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: /\.qzh$/,
+        test: /\.(png|jpg|gif|jpeg)$/i,
         use: [
           {
-            loader: path.join(__dirname, '../../loaders/row-loader.js'),
+            loader: 'image-webpack-loader',
             options: {
-              name: 'xxxxxxxxxx'
+              mozjpeg: {
+                progressive: true
+              },
+              optipng: {
+                enabled: false
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
             }
           }
         ]
@@ -50,7 +67,7 @@ const prodConfig = {
     }),
     new PurgeCssWebpackPlugin({
       paths: glob.sync(`${PATH.src}/**/*`, { nodir: true })
-    })
+    }),
     // new HardSourceWebpackPlugin()
     // new webpack.DllReferencePlugin({
     //   manifest: require(path.join(
@@ -59,6 +76,9 @@ const prodConfig = {
     //   ))
     // }),
     // new BundleAnalyzerPlugin()
+    new ZipPlugin({
+      filename: 'qzhZipFile'
+    })
   ],
   optimization: {
     splitChunks: {
@@ -96,6 +116,7 @@ const prodConfig = {
   },
   devtool: 'source-map',
   resolve: {
+    // 别名指定路径，缩短webpack查找时间
     alias: {
       react: path.resolve(
         Project,

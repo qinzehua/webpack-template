@@ -129,6 +129,17 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.qzh$/,
+        use: [
+          {
+            loader: path.join(__dirname, '../../my-loaders/row-loader.js'),
+            options: {
+              name: 'xxxxxxxxxx'
+            }
+          }
+        ]
       }
     ]
   },
