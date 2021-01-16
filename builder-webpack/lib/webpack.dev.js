@@ -14,7 +14,7 @@ const devConfig = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|vue)$/,
         use: ['eslint-loader']
       }
     ]

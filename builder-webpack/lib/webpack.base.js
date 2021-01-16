@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 const PostCssPreset = require('postcss-preset-env')
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const Project = process.cwd()
 const setMPA = () => {
   const entry = {}
@@ -52,6 +52,7 @@ module.exports = {
         include: path.join(Project, 'src'),
         use: ['babel-loader?cacheDirectory=true']
       },
+      { test: /\.vue$/, loader: 'vue-loader' },
       {
         test: /\.css$/,
         use: [
@@ -146,6 +147,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new FriendlyErrorPlugin(),
+    new VueLoaderPlugin(),
     function errorPlugin() {
       this.hooks.done.tap('done', stats => {
         if (

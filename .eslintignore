@@ -3,3 +3,4 @@ src/utils/query.js
 server/
 webpack.*.js
 **/.eslintrc.js
+**/*.vue
