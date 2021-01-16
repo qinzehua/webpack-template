@@ -1,4 +1,4 @@
-# 1.0.0 (2021-01-13)
+# 1.0.0 (2021-01-16)
 
 
 ### Bug Fixes
@@ -9,10 +9,11 @@
 
 ### Features
 
-* **plugin:** 自定义文件压缩plugin, 用jszip包生成zip的二进制文件,用webpack-sources把前面的二进制转成文件 d03344a
-* bundle analyze fc0f800
 * **git change log:** 安装conventional-changelog，它的功能是生成git 修改log 7bbace1
+* **plugin:** 自定义文件压缩plugin, 用jszip包生成zip的二进制文件,用webpack-sources把前面的二进制转成文件 d03344a
+* **vue:** vue 打包配置 f8cb7be
 * 测试commit lint e2f9554
+* bundle analyze fc0f800
 * git commit msg 标准 19ffc2c
 
 
