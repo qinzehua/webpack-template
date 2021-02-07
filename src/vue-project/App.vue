@@ -1,7 +1,7 @@
 
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
+    <h1>{{ msg }} 测试 git</h1>
     <input type="text" v-model="msg" />
   </div>
 </template>
